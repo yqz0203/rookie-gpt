@@ -1,0 +1,15 @@
+.cursor {
+  width: 2px;
+  height: 1rem;
+  @apply bg-gray-600;
+  animation: twinkle 1s linear infinite;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
