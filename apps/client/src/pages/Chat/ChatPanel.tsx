@@ -47,7 +47,7 @@ function ChatPanel(
     if (
       force ||
       bodyRef.current.scrollHeight <=
-        bodyRef.current.clientHeight + bodyRef.current.scrollTop + 50
+        bodyRef.current.clientHeight + bodyRef.current.scrollTop + 100
     ) {
       // try {
       // bodyRef.current?.scroll({ top: 9999999, behavior: 'smooth' });
@@ -118,8 +118,8 @@ function ChatPanel(
               // 头部空行
               if (!latestMessage && !str.trim()) return prev;
 
-              if (str.startsWith('EASYGPTRES://')) {
-                resData = JSON.parse(str.replace('EASYGPTRES://', ''));
+              if (str.startsWith('GPTRES://')) {
+                resData = JSON.parse(str.replace('GPTRES://', ''));
               } else {
                 latestMessage = prev + str;
               }

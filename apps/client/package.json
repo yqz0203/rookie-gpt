@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build && npm run upload",
     "preview": "vite preview",
-    "upload": "uploadcos easy-gpt"
+    "upload": "uploadcos rookie-gpt"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",

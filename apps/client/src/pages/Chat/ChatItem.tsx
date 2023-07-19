@@ -156,14 +156,14 @@ function ChatItem(props: {
         )}
       </div>
 
-      {id ? (
-        <div
-          className={classNames(
-            'h-[35px] transition-all opacity-0 group-hover:opacity-100 flex items-end space-x-1',
-            pos === 'l' ? 'justify-start' : 'justify-end',
-          )}
-        >
-          {id > 0 && (
+      <div
+        className={classNames(
+          'h-[35px] transition-all opacity-0 group-hover:opacity-100 flex items-end space-x-1',
+          pos === 'l' ? 'justify-start' : 'justify-end',
+        )}
+      >
+        {id && id > 0 && (
+          <>
             <Btn
               Icon={IconDelete}
               title="删除"
@@ -171,22 +171,22 @@ function ChatItem(props: {
                 onDelete?.(id);
               }}
             />
-          )}
-          <Btn
-            Icon={IconCopy}
-            title="复制"
-            onClick={() => {
-              try {
-                copyToClipboard(content);
+            <Btn
+              Icon={IconCopy}
+              title="复制"
+              onClick={() => {
+                try {
+                  copyToClipboard(content);
 
-                toast.success('复制成功');
-              } catch (e) {
-                //
-              }
-            }}
-          />
-        </div>
-      ) : null}
+                  toast.success('复制成功');
+                } catch (e) {
+                  //
+                }
+              }}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 

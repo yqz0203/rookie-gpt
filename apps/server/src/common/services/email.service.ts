@@ -15,7 +15,7 @@ export class EmailService {
     });
 
     await transporter.sendMail({
-      from: 'EasyGPT <yangqizhang@medlinker.com>',
+      from: 'RookieGPT <yangqizhang@medlinker.com>',
       to,
       subject,
       html,

@@ -121,7 +121,7 @@ export class AuthService {
 
     return this.emailService.sendEmail(
       email,
-      '【EASY GPT】登录验证码',
+      '【Rookie GPT】登录验证码',
       `你的验证码是：${code}，15分钟后过期`,
     );
   }

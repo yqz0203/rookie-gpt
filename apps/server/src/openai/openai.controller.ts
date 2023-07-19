@@ -123,7 +123,7 @@ export class OpenaiController {
               error,
             );
 
-            reject(new HttpException('AI错误', 500));
+            reject(new HttpException('AI生成错误，请重试', 500));
             return;
           }
         }
@@ -176,9 +176,7 @@ export class OpenaiController {
       role: 'assistant',
     });
 
-    res.write(
-      `EASYGPTRES://${JSON.stringify([userMessage, assistantMessage])}`,
-    );
+    res.write(`GPTRES://${JSON.stringify([userMessage, assistantMessage])}`);
 
     res.end();
   }
