@@ -2,9 +2,10 @@ import useSWR from 'swr';
 import { produce } from 'immer';
 import { useEffect, useState } from 'react';
 import {
-  MixerHorizontalIcon,
+  MixIcon,
   PlusIcon,
   MinusCircledIcon,
+  SunIcon,
 } from '@radix-ui/react-icons';
 import { useLatest } from 'ahooks';
 import { pick } from 'lodash';
@@ -64,7 +65,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
       onConfirm={trigger}
       confirmLoading={isMutating}
       trigger={
-        <Button type="outline" size="small" icon={<MixerHorizontalIcon />}>
+        <Button type="outline" size="small" icon={<SunIcon />}>
           提示词
         </Button>
       }
