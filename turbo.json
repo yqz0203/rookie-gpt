@@ -1,11 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["NODE_ENV"],
-  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NODE_ENV"
+  ],
+  "globalDependencies": [
+    "**/.env",
+    "**/tsconfig.json"
+  ],
   "pipeline": {
     "build": {
-      "dependsOn": ["^ts-check", "^lint", "^build"],
-      "outputs": ["dist/**", ".next/**", "archives/**"]
+      "dependsOn": [
+        "^ts-check",
+        "^lint",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "archives/**"
+      ]
     },
     "lint": {
       "outputs": []

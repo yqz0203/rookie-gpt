@@ -1,18 +1,19 @@
 {
-  "name": "chatgpt",
+  "name": "uploadcos",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-router-dom": "^6.14.1",
-    "turbo": "^1.8.8"
+    "cos-nodejs-sdk-v5": "^2.12.1",
+    "dotenv": "^16.3.1",
+    "glob": "^10.3.3",
+    "lodash.chunk": "^4.2.0"
   }
 }

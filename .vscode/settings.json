@@ -4,6 +4,8 @@
         "EASYGPTRES",
         "liaoliaots",
         "Openai",
-        "toastify"
+        "svgr",
+        "toastify",
+        "uploadcos"
     ]
 }
