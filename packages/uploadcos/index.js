@@ -21,7 +21,7 @@ const appName = process.argv[2] || 'test';
 async function uploadFiles(files) {
   await Promise.all(
     files.map(item => {
-      console.log('> 上传：', item.filePath);
+      console.log('> 上传：', item.key);
 
       return cos.sliceUploadFile({
         Bucket: Bucket,
