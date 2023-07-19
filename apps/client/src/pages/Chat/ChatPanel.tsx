@@ -21,6 +21,7 @@ import { MessageDto } from '../../types/dto';
 import useConversationList from '../../service/useConversationList';
 import request from '../../utils/request';
 import ConfigDialog from './ConfigDialog';
+import PromptsDialog from './PromptsDialog';
 
 export interface ChatPanelApi {
   scrollToEnd(force?: boolean): void;
@@ -224,7 +225,8 @@ function ChatPanel(
       </div>
 
       <div className="px-4 py-2 border-t ">
-        <div className='flex space-x-4 pb-2'>
+        <div className="flex space-x-3 pb-2">
+          <PromptsDialog chatConversationId={conversationInfo?.id} />
           <ConfigDialog chatConversationId={conversationInfo?.id} />
         </div>
 

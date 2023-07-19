@@ -39,6 +39,7 @@ importers:
       eslint-plugin-react: ^7.32.2
       eslint-plugin-react-hooks: ^4.6.0
       highlight.js: ^11.7.0
+      immer: ^10.0.2
       lodash: ^4.17.21
       markdown-it: ^13.0.1
       postcss: 8.4.21
@@ -71,6 +72,7 @@ importers:
       classnames: 2.3.2
       dayjs: 1.11.9
       highlight.js: 11.7.0
+      immer: 10.0.2
       lodash: 4.17.21
       markdown-it: 13.0.1
       react: 18.2.0
@@ -80,7 +82,7 @@ importers:
       react-tooltip: 5.14.0_biqbaboplfbrettd7655fr4n2y
       swr: 2.2.0_react@18.2.0
       vite-plugin-svgr: 3.2.0_vite@4.2.1
-      zustand: 4.3.7_react@18.2.0
+      zustand: 4.3.7_immer@10.0.2+react@18.2.0
     devDependencies:
       '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.6
       '@types/lodash': 4.14.195
@@ -5238,6 +5240,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -8709,7 +8715,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand/4.3.7_react@18.2.0:
+  /zustand/4.3.7_immer@10.0.2+react@18.2.0:
     resolution: {integrity: sha512-dY8ERwB9Nd21ellgkBZFhudER8KVlelZm8388B5nDAXhO/+FZDhYMuRnqDgu5SYyRgz/iaf8RKnbUs/cHfOGlQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -8721,6 +8727,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 10.0.2
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

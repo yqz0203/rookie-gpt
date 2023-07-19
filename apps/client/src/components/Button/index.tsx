@@ -11,6 +11,7 @@ export default forwardRef(function Button(
     size?: 'small' | 'normal';
     className?: string;
     disabled?: boolean;
+    full?: boolean;
     onClick?(): void;
   },
   ref: React.Ref<any>,
@@ -20,6 +21,7 @@ export default forwardRef(function Button(
     disabled,
     icon,
     loading,
+    full = false,
     type = 'default',
     size = 'normal',
     onClick,
@@ -41,6 +43,7 @@ export default forwardRef(function Button(
           'rounded-md px-4 h-[35px] text-sm active:shadow-[0_0_0_2px]',
         size === 'small' &&
           'rounded-md px-1 h-[30px] text-xs active:shadow-[0_0_0_1px]',
+        full && 'w-full items-center justify-center',
         className,
       )}
       onClick={onClick}

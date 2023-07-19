@@ -24,6 +24,7 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
     "highlight.js": "^11.7.0",
+    "immer": "^10.0.2",
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "react": "^18.2.0",
@@ -52,7 +53,7 @@
     "tailwindcss-animate": "^1.0.5",
     "tailwindcss-safe-area": "0.2.2",
     "typescript": "^4.9.3",
-    "vite": "^4.2.0",
-    "uploadcos": "workspace:*"
+    "uploadcos": "workspace:*",
+    "vite": "^4.2.0"
   }
 }
