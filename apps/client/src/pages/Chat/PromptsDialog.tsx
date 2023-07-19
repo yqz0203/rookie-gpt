@@ -61,7 +61,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
     <Modal
       open={modelOpen}
       onOpenChange={setModelOpen}
-      title="提示词配置"
+      title="提示词"
       onConfirm={trigger}
       confirmLoading={isMutating}
       trigger={
