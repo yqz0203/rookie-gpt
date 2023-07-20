@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import Spinner from '../Spinner';
-import { forwardRef } from 'react';
+import { forwardRef, isValidElement } from 'react';
 
 export default forwardRef(function Button(
   props: {
     children?: React.ReactNode;
-    icon?: React.ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    icon?: React.ReactNode | React.ComponentType<any>;
     loading?: boolean;
     type: 'primary' | 'outline' | 'default';
     size?: 'small' | 'normal';
@@ -14,7 +15,7 @@ export default forwardRef(function Button(
     full?: boolean;
     onClick?(): void;
   },
-  ref: React.Ref<any>,
+  ref: React.Ref<HTMLButtonElement>,
 ) {
   const {
     className,
@@ -26,6 +27,10 @@ export default forwardRef(function Button(
     size = 'normal',
     onClick,
   } = props;
+
+  const Icon: any = icon;
+
+  console.log(Icon);
 
   return (
     <button
@@ -59,9 +64,11 @@ export default forwardRef(function Button(
               : undefined
           }
         />
-      ) : (
-        icon
-      )}
+      ) : isValidElement(icon) ? (
+        Icon
+      ) : Icon ? (
+        <Icon width={18} height={18} />
+      ) : null}
       <span>{props.children}</span>
     </button>
   );

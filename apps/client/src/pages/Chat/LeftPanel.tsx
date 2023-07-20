@@ -1,8 +1,8 @@
 import useSWRMutation from 'swr/mutation';
 import useSWR from 'swr';
+import { PlusCircledIcon } from '@radix-ui/react-icons';
 import { APP_NAME } from '../../config';
 import Conversation from './Conversation';
-import { ReactComponent as IconAdd } from '../../assets/add.svg';
 import request from '../../utils/request';
 import useConversationList from '../../service/useConversationList';
 import { useEffect } from 'react';
@@ -75,7 +75,7 @@ export default function LeftPanel(props: {
           type="outline"
           size="small"
           loading={isMutating}
-          icon={<IconAdd width={20} height={20} />}
+          icon={<PlusCircledIcon />}
           onClick={trigger}
         >
           新建会话

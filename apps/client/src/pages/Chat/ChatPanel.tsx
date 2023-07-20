@@ -12,9 +12,11 @@ import useSWR, { mutate } from 'swr';
 import toast from 'react-hot-toast';
 import classNames from 'classnames';
 
+import { ReactComponent as IconFullscreen } from '../../assets/fullscreen.svg';
+import { ReactComponent as IconFullscreenExit } from '../../assets/fullscreenExit.svg';
 import ChartItem from './ChatItem';
 import './markdown.css';
-import { useAuthStore } from '../../store';
+import { useAppGlobalSetting, useAuthStore } from '../../store';
 import { API_HOST } from '../../config';
 import StopPng from '../../assets/stop.png';
 import { MessageDto } from '../../types/dto';
@@ -22,6 +24,7 @@ import useConversationList from '../../service/useConversationList';
 import request from '../../utils/request';
 import ConfigDialog from './ConfigDialog';
 import PromptsDialog from './PromptsDialog';
+import { Button } from '../../components';
 
 export interface ChatPanelApi {
   scrollToEnd(force?: boolean): void;
@@ -193,10 +196,27 @@ function ChatPanel(
     };
   });
 
+  const appSettings = useAppGlobalSetting();
+
   return (
     <div className="flex h-full flex-1 min-w-0 flex-col">
-      <div className="h-[44px] text-center leading-[44px] text-sm px-[100px] items-center border-b justify-center font-medium whitespace-nowrap overflow-hidden text-ellipsis">
-        {conversationInfo?.title}
+      <div className="h-[44px] leading-[44px] text-sm flex items-center border-b justify-center font-medium whitespace-nowrap overflow-hidden text-ellipsis">
+        <span className="flex-1 text-center px-[100px] ">
+          {conversationInfo?.title}
+        </span>
+
+        <div
+          className="h-[20px] w-[20px] mr-3 cursor-pointer"
+          onClick={() => {
+            appSettings.setFullScreen(!appSettings.fullScreen);
+          }}
+        >
+          {appSettings.fullScreen ? (
+            <IconFullscreenExit className="w-full h-full" />
+          ) : (
+            <IconFullscreen className="w-full h-full" />
+          )}
+        </div>
       </div>
 
       <div

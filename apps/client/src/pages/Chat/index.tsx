@@ -7,10 +7,12 @@ import classNames from 'classnames';
 import LeftPanel from './LeftPanel';
 import withLogin from '../../components/withLogin';
 import ChatPanel, { ChatPanelApi } from './ChatPanel';
+import { useAppGlobalSetting } from '../../store';
 
 function Chat() {
   const [chatConversationId, setChatConversationId] = useState<number>();
   const chatPanelRef = useRef<ChatPanelApi>(null);
+  const appSettings = useAppGlobalSetting();
   const onConversationChange = useMemoizedFn((id: number) => {
     if (chatPanelRef.current?.isSending()) {
       return toast.error('当前会话正在请求中，请先结束');
@@ -20,10 +22,13 @@ function Chat() {
   });
 
   return (
-    <div className="h-full">
+    <div className="h-full overflow-hidden">
       <div
         className={classNames(
-          'relative max-w-[1200px] mx-auto border shadow-sm flex bg-white overflow-hidden rounded-lg h-[90vh]',
+          'relative mx-auto flex bg-white overflow-hidden',
+          appSettings.fullScreen
+            ? 'w-full h-full'
+            : 'max-w-[1200px] mt-[5vh] h-[90vh] border shadow-sm rounded-lg',
         )}
       >
         <LeftPanel

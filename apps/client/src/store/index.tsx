@@ -20,28 +20,20 @@ export const useAuthStore = create<{
   ),
 );
 
-interface ChatHistory {
-  role?: 'user' | 'system' | 'assistant';
-  message: string;
-}
-
-export const useChatHistory = create<{
-  history: ChatHistory[];
-  setHistory(history: ChatHistory[]): void;
+export const useAppGlobalSetting = create<{
+  fullScreen: boolean;
+  setFullScreen(fullScreen: boolean): void;
 }>()(
   subscribeWithSelector(
     persist(
       set => ({
-        history: [] as {
-          role?: 'user' | 'system' | 'assistant';
-          message: string;
-        }[],
-        setHistory(history) {
-          set({ history });
+        fullScreen: false,
+        setFullScreen(fullScreen) {
+          set({ fullScreen });
         },
       }),
       {
-        name: 'history-store/persist',
+        name: 'app-settings-store/persist',
       },
     ),
   ),
