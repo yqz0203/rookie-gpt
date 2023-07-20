@@ -28,6 +28,7 @@
     },
     "ts-check": {
       "cache": true
-    }
+    },
+    "format": {}
   }
 }

@@ -35,6 +35,16 @@ export class ChatsService {
     });
   }
 
+  async queryConversationDetail(data: { chatConversationId: number }) {
+    return await this.chatConversation.findOne({
+      where: {
+        id: data.chatConversationId,
+        deletedAt: null,
+      },
+      order: [['id', 'DESC']],
+    });
+  }
+
   async createConversation(data: CreateConversationDto) {
     return await this.chatConversation.create({
       title: data.title,

@@ -44,6 +44,10 @@ export class OpenaiController {
       chatConversationId: body.chatConversationId,
     });
 
+    const conversationDetail = await this.chatService.queryConversationDetail({
+      chatConversationId: body.chatConversationId,
+    });
+
     let prompts = [];
 
     try {
@@ -59,14 +63,13 @@ export class OpenaiController {
         limit: 10,
       })
     )
-      .map((message) => {
+      .map(message => {
         return {
           role: message.get('role'),
           content: message.get('content'),
         } as ChatCompletionRequestMessage;
       })
       .reverse();
-    const isFirstMessage = messages.length === 0;
 
     messages = [
       ...prompts,
@@ -99,11 +102,11 @@ export class OpenaiController {
     );
 
     await new Promise((resolve, reject) => {
-      (response.data as any).on('data', (data) => {
+      (response.data as any).on('data', data => {
         const lines = data
           .toString()
           .split('\n')
-          .filter((line) => line.trim() !== '');
+          .filter(line => line.trim() !== '');
 
         let str = '';
 
@@ -145,8 +148,8 @@ export class OpenaiController {
       });
     });
 
-    // 修改当前会话的标题
-    if (isFirstMessage) {
+    // 没有标题时，修改当前会话的标题
+    if (!conversationDetail?.title.trim()) {
       await this.chatService.updateConversation({
         title: body.message.slice(0, 200),
         id: body.chatConversationId,

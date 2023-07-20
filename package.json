@@ -8,6 +8,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "ts-check": "turbo run ts-check",
+    "format": "turbo run format",
     "lint": "turbo run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

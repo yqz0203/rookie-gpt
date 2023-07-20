@@ -1,14 +1,17 @@
 import classNames from 'classnames';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useLatest } from 'ahooks';
+import { Pencil2Icon, CrossCircledIcon } from '@radix-ui/react-icons';
 import dayjs from 'dayjs';
 import { animated, useTransition } from '@react-spring/web';
 
 import useConversationList from '../../service/useConversationList';
-import { ReactComponent as IconClose } from '../../assets/close.svg';
 import useSWRMutation from 'swr/mutation';
 import request from '../../utils/request';
 import { ConversationDto } from '../../types/dto';
+import EditConversationTitleModal, {
+  EditConversationTitleModalAction,
+} from '../../containers/EditConversationTitleModal';
 
 export default function Conversation(props: {
   current?: number;
@@ -16,7 +19,6 @@ export default function Conversation(props: {
 }) {
   const { current, onConversationChange } = props;
   const { data } = useConversationList();
-
   const onConversationChangeRef = useLatest(onConversationChange);
 
   useEffect(() => {
@@ -26,7 +28,6 @@ export default function Conversation(props: {
   }, [current, data, onConversationChangeRef]);
 
   const dataRef = useLatest(data);
-
   const { trigger } = useSWRMutation(
     '/chats/query-conversation',
     async (url, { arg }: { arg: ConversationDto }) => {
@@ -57,7 +58,6 @@ export default function Conversation(props: {
   );
 
   const refMap = useMemo(() => new WeakMap(), []);
-
   const transitions = useTransition(data || [], {
     from: { opacity: 0, height: 0 },
     keys: item => item.id,
@@ -67,54 +67,66 @@ export default function Conversation(props: {
     leave: [{ opacity: 0, height: 0 }],
   });
 
-  return (
-    <div
-      className="flex-1 mx-2 min-h-0 overflow-y-scroll px-2 scrollbar scrollbar-1"
-      id="conversation-list"
-    >
-      <div className="">
-        {transitions((style, item) => (
-          <animated.div
-            className="overflow-hidden"
-            ref={(ref: HTMLDivElement) => ref && refMap.set(item, ref)}
-            key={item.id}
-            style={style}
-          >
-            <div
-              key={item.id}
-              onClick={() => props.onConversationChange(item.id)}
-              className={classNames(
-                'relative group bg-white rounded-lg cursor-pointer my-1.5 transition-colors border-[2px] pl-4 pr-4 py-2',
-                current === item.id
-                  ? 'border-gray-600'
-                  : 'border-gray-200 hover:bg-gray-200',
-              )}
-            >
-              <div className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis pr-4">
-                {item.title || '新的会话'}
-              </div>
-              <div className="text-xs mt-4">
-                <span>共{item.messageCount}条对话</span>
-                <span className="float-right">
-                  {dayjs(item.latestMessageTime || item.updatedAt).format(
-                    'YYYY-M-D HH:mm:ss',
-                  )}
-                </span>
-              </div>
+  const editTitleRef = useRef<EditConversationTitleModalAction>(null);
 
-              <IconClose
-                onClick={e => {
-                  e.stopPropagation();
-                  trigger(item);
-                }}
-                width={20}
-                height={20}
-                className="transition-all absolute right-1 top-1 opacity-0 group-hover:opacity-100 translate-x-[5px] group-hover:translate-x-0"
-              />
-            </div>
-          </animated.div>
-        ))}
+  return (
+    <>
+      <div
+        className="flex-1 mx-2 min-h-0 overflow-y-scroll px-2 scrollbar scrollbar-1"
+        id="conversation-list"
+      >
+        <div className="">
+          {transitions((style, item) => (
+            <animated.div
+              className="overflow-hidden"
+              ref={(ref: HTMLDivElement) => ref && refMap.set(item, ref)}
+              key={item.id}
+              style={style}
+            >
+              <div
+                key={item.id}
+                onClick={() => props.onConversationChange(item.id)}
+                className={classNames(
+                  'relative group bg-white rounded-lg cursor-pointer my-1.5 transition-colors border-[2px] pl-4 pr-4 py-2',
+                  current === item.id
+                    ? 'border-gray-600'
+                    : 'border-gray-200 hover:bg-gray-200',
+                )}
+              >
+                <div className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis pr-6">
+                  {item.title || '新的会话'}
+                </div>
+                <div className="text-xs mt-4">
+                  <span>共{item.messageCount}条对话</span>
+                  <span className="float-right">
+                    {dayjs(item.latestMessageTime || item.updatedAt).format(
+                      'YYYY-M-D HH:mm:ss',
+                    )}
+                  </span>
+                </div>
+
+                <CrossCircledIcon
+                  onClick={e => {
+                    e.stopPropagation();
+                    trigger(item);
+                  }}
+                  className="transition-all cursor-pointer absolute right-1 top-2 opacity-0 group-hover:opacity-100 hover:text-cyan-600 translate-x-[5px] group-hover:translate-x-0"
+                />
+
+                <Pencil2Icon
+                  onClick={e => {
+                    e.stopPropagation();
+                    editTitleRef.current?.open(item.id, item.title);
+                  }}
+                  className="transition-all cursor-pointer absolute right-6 top-2 opacity-0 group-hover:opacity-100  hover:text-cyan-600 translate-x-[5px] group-hover:translate-x-0"
+                />
+              </div>
+            </animated.div>
+          ))}
+        </div>
+
+        <EditConversationTitleModal ref={editTitleRef} />
       </div>
-    </div>
+    </>
   );
 }

@@ -4,8 +4,8 @@ import { ReactNode } from 'react';
 import Button from '../Button';
 
 interface Props extends Dialog.DialogProps {
-  title: ReactNode;
-  trigger: React.ReactNode;
+  title?: ReactNode;
+  trigger?: React.ReactNode;
   clickMaskClose?: boolean;
   confirmLoading?: boolean;
   confirmText?: string;

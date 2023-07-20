@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "upload": "uploadcos rookie-gpt",
     "lint": "eslint \"{src}/**/*.ts\" --max-warnings=0",
+    "format": "prettier --write \"src/**/*.{ts,js,tsx,jsx,json}\"",
     "ts-check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {

@@ -36,7 +36,7 @@ const Select = (props: Props) => {
   return (
     <RadixSelect.Root {...selectProps}>
       <RadixSelect.Trigger className="inline-flex rounded pl-4 border-[1px] border-gray-300 w-[200px] text-sm h-8 items-center gap-1 bg-white cursor-pointer outline-none">
-        <div className='flex-1 text-left whitespace-nowrap min-w-0 overflow-hidden text-ellipsis'>
+        <div className="flex-1 text-left whitespace-nowrap min-w-0 overflow-hidden text-ellipsis">
           <RadixSelect.Value placeholder="请选择..." className="flex-1" />
         </div>
         <RadixSelect.Icon className="pr-2 ml-1">
