@@ -20,7 +20,7 @@ function Chat() {
   });
 
   return (
-    <div className="h-full pt-[5vh]">
+    <div className="h-full">
       <div
         className={classNames(
           'relative max-w-[1200px] mx-auto border shadow-sm flex bg-white overflow-hidden rounded-lg h-[90vh]',

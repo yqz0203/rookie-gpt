@@ -6,6 +6,7 @@ import Button from '../Button';
 interface Props extends Dialog.DialogProps {
   title: ReactNode;
   trigger: React.ReactNode;
+  clickMaskClose?: boolean;
   confirmLoading?: boolean;
   confirmText?: string;
   onConfirm?(): void;
@@ -17,10 +18,13 @@ const Modal = (props: Props) => {
     confirmLoading,
     trigger,
     children,
+    clickMaskClose = true,
     confirmText = '确认',
     onConfirm,
     ...dialogProps
   } = props;
+
+  const ContentComp = clickMaskClose ? Dialog.Content : 'div';
 
   return (
     <Dialog.Root {...dialogProps}>
@@ -32,7 +36,7 @@ const Modal = (props: Props) => {
             e.stopPropagation();
           }}
         />
-        <div className="fixed z-[999] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <ContentComp className="fixed z-[999] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="relative animate-in slide-in-from-bottom-2/4 fade-in rounded-md bg-white shadow-[0_10px_28px_-10px_rgba(14,18,22,0.4)] duration-300">
             <Dialog.Title className="font-bold text-base h-[50px] px-5 flex items-center">
               {title}
@@ -57,7 +61,7 @@ const Modal = (props: Props) => {
               </button>
             </Dialog.Close>
           </div>
-        </div>
+        </ContentComp>
       </Dialog.Portal>
     </Dialog.Root>
   );

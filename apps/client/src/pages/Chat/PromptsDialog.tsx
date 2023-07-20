@@ -1,12 +1,7 @@
 import useSWR from 'swr';
 import { produce } from 'immer';
 import { useEffect, useState } from 'react';
-import {
-  MixIcon,
-  PlusIcon,
-  MinusCircledIcon,
-  SunIcon,
-} from '@radix-ui/react-icons';
+import { PlusIcon, MinusCircledIcon, SunIcon } from '@radix-ui/react-icons';
 import { useLatest } from 'ahooks';
 import { pick } from 'lodash';
 import useSWRMutation from 'swr/mutation';
@@ -63,6 +58,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
       onOpenChange={setModelOpen}
       title="提示词"
       onConfirm={trigger}
+      clickMaskClose={false}
       confirmLoading={isMutating}
       trigger={
         <Button type="outline" size="small" icon={<SunIcon />}>

@@ -63,6 +63,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
       onOpenChange={setModelOpen}
       title="模型配置"
       onConfirm={trigger}
+      clickMaskClose={false}
       confirmLoading={isMutating}
       trigger={
         <Button type="outline" size="small" icon={<MixerHorizontalIcon />}>

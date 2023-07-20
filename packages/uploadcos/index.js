@@ -52,4 +52,13 @@ async function start() {
   console.log('> Upload Cos done.');
 }
 
-start();
+if (
+  process.env.COS_KEY &&
+  process.env.COS_SECRET &&
+  process.env.COS_BUCKET &&
+  process.env.COS_REGION
+) {
+  start();
+} else {
+  console.log('> Missing cos config, skip.');
+}

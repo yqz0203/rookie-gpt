@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build && npm run upload",
     "preview": "vite preview",
-    "upload": "uploadcos rookie-gpt"
+    "upload": "uploadcos rookie-gpt",
+    "lint": "eslint \"{src}/**/*.ts\" --max-warnings=0",
+    "ts-check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",
@@ -54,6 +56,7 @@
     "tailwindcss-safe-area": "0.2.2",
     "typescript": "^4.9.3",
     "uploadcos": "workspace:*",
+    "lintstaged-config-custom": "workspace:*",
     "vite": "^4.2.0"
   }
 }
