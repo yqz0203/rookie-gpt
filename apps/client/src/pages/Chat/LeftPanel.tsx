@@ -55,8 +55,7 @@ export default function LeftPanel(props: {
   return (
     <div className="w-[300px] h-full border-r from-slate-100 to-white bg-gradient-to-b flex flex-col">
       <h2 className="text-3xl font-bold px-4 pt-6 py-8">
-        {APP_NAME}
-
+        🥬🐦{APP_NAME}
         {financeData && (
           <span className="text-xs float-right font-normal mt-5 text-cyan-600">
             ${(financeData.usage / 100).toFixed(2)}/
