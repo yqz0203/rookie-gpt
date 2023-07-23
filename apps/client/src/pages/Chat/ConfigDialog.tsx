@@ -67,7 +67,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
       confirmLoading={isMutating}
       trigger={
         <Button type="outline" size="small" icon={<MixerHorizontalIcon />}>
-          模型配置
+          模型配置({chatConfig?.model})
         </Button>
       }
     >

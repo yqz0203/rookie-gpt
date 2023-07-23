@@ -16,8 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "^1.8.8",
+    "@commitlint/config-conventional": "^17.6.7",
+    "commitlint": "^17.6.7",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.2"
+    "lint-staged": "^13.1.2",
+    "turbo": "^1.8.8"
   }
 }

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { produce } from 'immer';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PlusIcon, MinusCircledIcon, SunIcon } from '@radix-ui/react-icons';
 import { useLatest } from 'ahooks';
 import { pick } from 'lodash';
@@ -52,6 +52,14 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
     }
   }, [modelOpen, chatConfigRef]);
 
+  const promptsCount = useMemo(() => {
+    try {
+      return JSON.parse(chatConfig.prompts).length;
+    } catch (error) {
+      return 0;
+    }
+  }, [chatConfig]);
+
   return (
     <Modal
       open={modelOpen}
@@ -62,7 +70,7 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
       confirmLoading={isMutating}
       trigger={
         <Button type="outline" size="small" icon={<SunIcon />}>
-          提示词
+          提示词({promptsCount})
         </Button>
       }
     >
