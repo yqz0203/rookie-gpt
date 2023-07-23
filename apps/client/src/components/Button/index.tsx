@@ -28,9 +28,8 @@ export default forwardRef(function Button(
     onClick,
   } = props;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Icon: any = icon;
-
-  console.log(Icon);
 
   return (
     <button

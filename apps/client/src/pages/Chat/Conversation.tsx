@@ -40,8 +40,6 @@ export default function Conversation(props: {
 
       if (index !== undefined && index >= 0) {
         if (dataRef.current?.[index + 1]) {
-          console.log(dataRef.current?.[index + 1].id);
-
           onConversationChange(dataRef.current?.[index + 1].id);
         } else {
           onConversationChange(dataRef.current?.[index - 1]?.id || 0);
