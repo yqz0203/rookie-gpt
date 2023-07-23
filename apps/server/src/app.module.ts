@@ -18,6 +18,7 @@ import { ChatConversationConfig } from './chats/chat-conversation-config.model';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: ['.env.local', '.env'],
     }),
     CacheModule.register({ isGlobal: true }),

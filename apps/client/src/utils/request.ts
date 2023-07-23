@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { API_HOST } from '../config';
 import { clearStore, useAuthStore } from '../store';
@@ -31,10 +32,10 @@ request.interceptors.response.use(
     }
 
     throw new ApiError(
-      Array.isArray(err.response.data?.message)
-        ? err.response.data?.message[0]
-        : err.response.data?.message || err.response.statusText,
-      err.response.data.statusCode || err.response.status,
+      Array.isArray(err.response?.data?.message)
+        ? err.response?.data?.message[0]
+        : err.response?.data?.message || err.response?.statusText || '出错了！',
+      err.response?.data?.statusCode || err.response?.status || 500,
     );
   },
 );
