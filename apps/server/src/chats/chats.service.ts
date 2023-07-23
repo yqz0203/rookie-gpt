@@ -46,10 +46,17 @@ export class ChatsService {
   }
 
   async createConversation(data: CreateConversationDto) {
-    return await this.chatConversation.create({
+    const conversation = await this.chatConversation.create({
       title: data.title,
       userId: data.userId,
     });
+
+    await this.chatConversationConfig.create({
+      chatConversationId: conversation.id,
+      userId: data.userId,
+    });
+
+    return conversation;
   }
 
   async updateConversation(data: UpdateConversationDto) {

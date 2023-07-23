@@ -39,7 +39,8 @@ export default function LeftPanel(props: {
   );
 
   const { data: financeData } = useSWR<{ limit: number; usage: number }>(
-    '/openai/finance-info',
+    // '/openai/finance-info',
+    null,
     {
       refreshInterval: 30000,
     },
