@@ -3,7 +3,7 @@
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Build Status](https://api.travis-ci.com/user/repo.svg?branch=master)](https://travis-ci.com/user/repo)
 
-![product](image.png)
+![product](./docs/product.jpg)
 
 🥬🐦 搭建属于个人或多人使用的 ChatGPT 应用
 
