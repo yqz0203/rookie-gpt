@@ -23,7 +23,7 @@ export class ChatConversationMessage extends Model {
 
   @ForeignKey(() => User) @Column userId!: number;
 
-  @Column({ allowNull: false, type: DataType.STRING })
+  @Column({ allowNull: false, type: DataType.TEXT })
   content: string;
 
   @Column({ allowNull: false, values: ['assistant', 'user', 'system'] })
