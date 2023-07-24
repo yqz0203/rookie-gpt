@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   forwardRef,
   useImperativeHandle,
@@ -24,7 +25,6 @@ import useConversationList from '../../service/useConversationList';
 import request from '../../utils/request';
 import ConfigDialog from './ConfigDialog';
 import PromptsDialog from './PromptsDialog';
-import { Button } from '../../components';
 
 export interface ChatPanelApi {
   scrollToEnd(force?: boolean): void;
@@ -200,8 +200,8 @@ function ChatPanel(
 
   return (
     <div className="flex h-full flex-1 min-w-0 flex-col">
-      <div className="h-[44px] leading-[44px] text-sm flex items-center border-b justify-center font-medium whitespace-nowrap overflow-hidden text-ellipsis">
-        <span className="flex-1 text-center px-[100px] ">
+      <div className="h-[44px] leading-[44px] text-sm flex items-center border-b justify-center font-medium ">
+        <span className="flex-1 text-center px-[100px] whitespace-nowrap overflow-hidden text-ellipsis">
           {conversationInfo?.title}
         </span>
 
