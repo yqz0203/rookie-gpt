@@ -1,6 +1,6 @@
 import useSWRMutation from 'swr/mutation';
 import useSWR from 'swr';
-import { PlusCircledIcon } from '@radix-ui/react-icons';
+import { GitHubLogoIcon, PlusCircledIcon } from '@radix-ui/react-icons';
 import { APP_NAME } from '../../config';
 import Conversation from './Conversation';
 import request from '../../utils/request';
@@ -69,9 +69,22 @@ export default function LeftPanel(props: {
         onConversationChange={props.onConversationChange}
       />
 
-      <div className="pb-3 pt-3 px-4 flex">
+      <div className="pb-3 pt-3 px-4 flex justify-end space-x-2">
+        <a
+          href="https://github.com/yqz0203/rookie-gpt"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Button
+            type="outline"
+            size="small"
+            loading={isMutating}
+            icon={<GitHubLogoIcon />}
+          >
+            赏个star
+          </Button>
+        </a>
         <Button
-          className="ml-auto"
           type="outline"
           size="small"
           loading={isMutating}
