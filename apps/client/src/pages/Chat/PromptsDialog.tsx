@@ -26,7 +26,13 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
     ['/chats/query-conversation-config', { chatConversationId }],
     async () => {
       const res = await request.post('/chats/update-conversation-config', {
-        ...pick(chatConfig, ['model', 'temperature', 'topP']),
+        ...pick(chatConfig, [
+          'model',
+          'temperature',
+          'topP',
+          'prompts',
+          'singleChatMode',
+        ]),
         prompts: JSON.stringify(prompts),
         chatConversationId,
       });

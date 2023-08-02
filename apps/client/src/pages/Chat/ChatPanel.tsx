@@ -25,6 +25,7 @@ import useConversationList from '../../service/useConversationList';
 import request from '../../utils/request';
 import ConfigDialog from './ConfigDialog';
 import PromptsDialog from './PromptsDialog';
+import SingleChatButton from './SingleChatButton';
 
 export interface ChatPanelApi {
   scrollToEnd(force?: boolean): void;
@@ -263,6 +264,7 @@ function ChatPanel(
         <div className="flex space-x-3 pb-2">
           <PromptsDialog chatConversationId={conversationInfo?.id} />
           <ConfigDialog chatConversationId={conversationInfo?.id} />
+          <SingleChatButton chatConversationId={conversationInfo?.id} />
         </div>
 
         <div className="pb-safe relative">

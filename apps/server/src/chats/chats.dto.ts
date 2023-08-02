@@ -5,7 +5,7 @@ import {
   IsNumberString,
   IsNumber,
   IsDate,
-  IsDecimal,
+  IsBoolean,
 } from 'class-validator';
 import { OmitType } from '@nestjs/mapped-types';
 
@@ -135,6 +135,8 @@ export class UpdateConversationConfigDto {
   temperature: number;
   @IsNumber()
   topP: number;
+  @IsBoolean()
+  singleChatMode: boolean;
   // @IsInt()
   // n: number;
   // @Max(2)

@@ -62,6 +62,10 @@ export class ChatConversationConfig extends Model<ChatConversationConfig> {
 
   @ForeignKey(() => User) @Column userId: number;
 
+  @Default(false)
+  @Column
+  singleChatMode: boolean;
+
   @Column
   deletedAt: Date;
 }

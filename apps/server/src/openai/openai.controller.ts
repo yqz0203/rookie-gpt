@@ -54,22 +54,28 @@ export class OpenaiController {
       prompts = JSON.parse(conversationConfig.prompts);
     } catch (e) {}
 
-    // 获取历史会话
-    let messages = (
-      await this.chatService.queryConversationMessageList({
-        userId,
-        chatConversationId: body.chatConversationId,
-        sort: [['id', 'DESC']],
-        limit: 10,
-      })
-    )
-      .map(message => {
-        return {
-          role: message.get('role'),
-          content: message.get('content'),
-        } as ChatCompletionRequestMessage;
-      })
-      .reverse();
+    let messages: ChatCompletionRequestMessage[];
+
+    if (conversationConfig.singleChatMode) {
+      messages = [];
+    } else {
+      // 获取历史会话
+      messages = (
+        await this.chatService.queryConversationMessageList({
+          userId,
+          chatConversationId: body.chatConversationId,
+          sort: [['id', 'DESC']],
+          limit: 10,
+        })
+      )
+        .map(message => {
+          return {
+            role: message.get('role'),
+            content: message.get('content'),
+          } as ChatCompletionRequestMessage;
+        })
+        .reverse();
+    }
 
     messages = [
       ...prompts,
