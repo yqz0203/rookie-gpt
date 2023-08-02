@@ -147,9 +147,6 @@ export class OpenaiController {
       });
 
       (response.data as any).on('error', () => {
-        resolve('');
-        res.end();
-        res.destroy();
         reject(new Error('获取数据出错'));
       });
     });
