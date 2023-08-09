@@ -71,8 +71,12 @@ function ChatPanel(
 
     const abort = new AbortController();
     let latestMessage = '';
+    let reader: any;
 
-    abortRef.current = () => abort.abort();
+    abortRef.current = () => {
+      abort.abort();
+      reader?.cancel();
+    };
 
     try {
       const res = await fetch(API_HOST + '/openai/chatCompletion', {
@@ -149,6 +153,8 @@ function ChatPanel(
         }
       }
     } catch (e: any) {
+      console.log(e);
+
       if (e.name === 'AbortError') {
         setSubmitting(false);
         setStreamData('');

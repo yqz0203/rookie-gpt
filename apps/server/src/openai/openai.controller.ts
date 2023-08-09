@@ -90,6 +90,9 @@ export class OpenaiController {
 
     let fullStr = '';
 
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     const response = await openai.createChatCompletion(
       {
         model: conversationConfig.model,
@@ -104,10 +107,16 @@ export class OpenaiController {
         responseType: 'stream',
         proxy: false,
         httpsAgent: this.openaiService.getHttpsProxyAgent(),
+        signal,
       },
     );
 
     await new Promise((resolve, reject) => {
+      res.on('close', () => {
+        reject(new Error('请求中端'));
+        controller.abort();
+      });
+
       (response.data as any).on('data', data => {
         const lines = data
           .toString()
