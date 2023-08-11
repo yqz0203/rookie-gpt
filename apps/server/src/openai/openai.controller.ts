@@ -84,7 +84,11 @@ export class OpenaiController {
     ];
 
     const configuration = new Configuration({
-      apiKey: this.configService.get('OPENAI_API_KEY'),
+      apiKey: this.configService.get(
+        conversationConfig.model.toLocaleLowerCase().includes('gpt-4')
+          ? 'OPENAI_API_KEY'
+          : 'OPENAI_API_KEY3.5',
+      ),
     });
     const openai = new OpenAIApi(configuration);
 
