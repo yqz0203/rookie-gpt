@@ -135,6 +135,7 @@ export class OpenaiController {
           if (message === '[DONE]') {
             break; // Stream finished
           }
+
           try {
             const parsed = JSON.parse(message);
             str += parsed.choices[0].delta.content || '';
@@ -144,8 +145,8 @@ export class OpenaiController {
               message,
               error,
             );
-
-            reject(new HttpException('AI生成错误，请重试', 500));
+            controller.abort();
+            reject(new HttpException('OPENAI错误，请重试', 500));
             return;
           }
         }
@@ -181,21 +182,19 @@ export class OpenaiController {
       });
     }
 
-    const userMessage = await this.chatService.createConversationMessage({
+    await this.chatService.createConversationMessage({
       chatConversationId: body.chatConversationId,
       userId: (req as any).user.userId,
       content: body.message,
       role: 'user',
     });
 
-    const assistantMessage = await this.chatService.createConversationMessage({
+    await this.chatService.createConversationMessage({
       chatConversationId: body.chatConversationId,
       userId,
       content: fullStr,
       role: 'assistant',
     });
-
-    res.write(`GPTRES://${JSON.stringify([userMessage, assistantMessage])}`);
 
     res.end();
   }

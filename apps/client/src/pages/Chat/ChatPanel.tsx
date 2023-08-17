@@ -102,27 +102,27 @@ function ChatPanel(
 
       const reader = res.body?.getReader();
 
-      let resData: MessageDto[] = [];
-      let shouldSkipOutput = false;
-      let gptRESStr = '';
-
       if (reader) {
         // eslint-disable-next-line no-constant-condition
         while (true) {
           const { done, value } = await reader.read();
 
           if (done) {
-            try {
-              resData = JSON.parse(gptRESStr);
-            } catch (e) {
-              console.error(
-                `反序列化失败：${(e as Error).message}\n${gptRESStr}`,
-              );
-            }
-
             // 刷新最后消息时间
             mutate('/chats/query-conversation');
-            mutateMessageList(prev => [...(prev || []), ...resData]);
+            mutateMessageList(prev => [
+              ...(prev || []),
+              {
+                id: -2,
+                role: 'user',
+                content: currentQuestion,
+              } as any,
+              {
+                id: -1,
+                role: 'assistant',
+                content: latestMessage,
+              } as any,
+            ]);
 
             setCurrentQuestion('');
             setSubmitting(false);
@@ -132,23 +132,15 @@ function ChatPanel(
           } else {
             const decoder = new TextDecoder('utf-8');
             const str = decoder.decode(value);
-            if (shouldSkipOutput) {
-              gptRESStr += str;
-            } else {
-              setStreamData(prev => {
-                // 头部空行
-                if (!latestMessage && !str.trim()) return prev;
 
-                if (str.startsWith('GPTRES://')) {
-                  shouldSkipOutput = true;
-                  gptRESStr += str.replace('GPTRES://', '');
-                } else {
-                  latestMessage = prev + str;
-                }
+            setStreamData(prev => {
+              // 头部空行
+              if (!latestMessage && !str.trim()) return prev;
 
-                return latestMessage;
-              });
-            }
+              latestMessage = prev + str;
+
+              return latestMessage;
+            });
           }
         }
       }

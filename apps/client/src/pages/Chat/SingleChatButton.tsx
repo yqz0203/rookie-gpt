@@ -47,7 +47,15 @@ const SingleChatButton = (props: { chatConversationId?: number }) => {
       type="outline"
       size="small"
       disabled={isMutating}
-      icon={<input type="checkbox" checked={chatConfig?.singleChatMode} />}
+      icon={
+        <input
+          type="checkbox"
+          checked={chatConfig?.singleChatMode || false}
+          onChange={() => {
+            //
+          }}
+        />
+      }
       onClick={() => {
         trigger(!chatConfig?.singleChatMode);
       }}
