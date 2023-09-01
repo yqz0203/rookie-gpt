@@ -3,6 +3,7 @@ export function copyToClipboard(text: string) {
   const div = document.createElement('div');
   // 设置要复制的文本内容
   div.textContent = text;
+  div.style.whiteSpace = 'pre-wrap';
   // 将div元素添加到页面中
   document.body.appendChild(div);
 
