@@ -131,42 +131,15 @@ export class OpenaiController {
 
         let str = '';
 
-        if (conversationConfig.model.includes('gpt-4')) {
-          for (const line of lines) {
-            const message = line.replace(/^data: /, '');
-            if (message === '[DONE]') {
-              break; // Stream finished
-            }
-            if (line.startsWith('data') && tempStr) {
-              try {
-                const parsed = JSON.parse(tempStr);
-
-                str += parsed.choices[0].delta.content || '';
-              } catch (error) {
-                console.error(
-                  'Could not JSON parse stream message',
-                  message,
-                  error,
-                );
-                controller.abort();
-                reject(new HttpException('OPENAI错误，请重试', 500));
-                return;
-              }
-              tempStr = message;
-            } else {
-              tempStr += message;
-            }
+        for (const line of lines) {
+          const message = line.replace(/^data: /, '');
+          if (message === '[DONE]') {
+            break; // Stream finished
           }
-        } else {
-          for (const line of lines) {
-            const message = line.replace(/^data: /, '');
-
-            if (message === '[DONE]') {
-              break; // Stream finished
-            }
-
+          if (line.startsWith('data') && tempStr) {
             try {
-              const parsed = JSON.parse(message);
+              const parsed = JSON.parse(tempStr);
+
               str += parsed.choices[0].delta.content || '';
             } catch (error) {
               console.error(
@@ -178,6 +151,9 @@ export class OpenaiController {
               reject(new HttpException('OPENAI错误，请重试', 500));
               return;
             }
+            tempStr = message;
+          } else {
+            tempStr += message;
           }
         }
 
