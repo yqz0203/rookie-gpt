@@ -55,7 +55,9 @@ export default function Login() {
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="w-[400px] h-[300px] p-6 bg-white rounded-lg -mt-[100px] shadow-md border animate-in fade-in zoom-in duration-500">
-        <div className="text-3xl text-center font-bold mb-2">{APP_NAME}</div>
+        <div className="text-3xl text-center font-bold mb-2 whitespace-nowrap">
+          {APP_NAME}
+        </div>
         <div className="text-sm text-gray-400 text-center mb-8">请登录</div>
         <form
           onSubmit={e => {
