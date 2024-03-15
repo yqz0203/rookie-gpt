@@ -265,11 +265,11 @@ function ChatPanel(
           <SingleChatButton chatConversationId={conversationInfo?.id} />
         </div>
 
-        <div className="pb-safe relative">
+        <div className="relative">
           <textarea
             value={currentQuestion}
             onInput={e => setCurrentQuestion(e.currentTarget.value)}
-            className="flex-1 h-[80px] pl-3 pr-[80px] py-2 w-full focus:border-cyan-600 resize-none  border-[2px] text-sm rounded-md outline-none disabled:text-gray-300"
+            className="absolute inset-0 pl-3 pr-[80px] py-2 w-full break-all focus:border-cyan-600 resize-none leading-normal scrollbar scrollbar-1 border-[2px] text-sm rounded-md outline-none disabled:text-gray-300"
             placeholder={'按ctrl+enter发送'}
             disabled={submitting || isLoadingMessageList}
             onKeyDown={e => {
@@ -278,9 +278,12 @@ function ChatPanel(
               }
             }}
           />
+          <div className="min-h-[80px] max-h-[300px] opacity-0 whitespace-pre-wrap pl-3 py-6 pr-[80px] text-sm break-all leading-normal pointer-events-none">
+            {currentQuestion}
+          </div>
           <button
             className={classNames(
-              'transition-all absolute bottom-4 text-sm right-3 rounded-md py-2 w-[60px] h-[36px] flex items-center justify-center text-white disabled:cursor-not-allowed disabled:text-gray-200',
+              'transition-all absolute bottom-4 text-sm right-3 rounded-md w-[60px] h-[36px] flex items-center justify-center text-white disabled:cursor-not-allowed disabled:text-gray-200',
               submitting
                 ? ' active:bg-red-600 disabled:active:bg-red-500 bg-red-500'
                 : ' active:bg-cyan-600 disabled:active:bg-cyan-500 bg-cyan-500',
