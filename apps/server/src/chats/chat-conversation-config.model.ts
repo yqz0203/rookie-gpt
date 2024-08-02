@@ -16,7 +16,7 @@ import { ChatConversation } from './chat-conversation.model';
 
 @Table
 export class ChatConversationConfig extends Model<ChatConversationConfig> {
-  @Default('gpt-3.5-turbo')
+  @Default('gpt-4o-mini')
   @AllowNull(false)
   @Column(DataType.STRING)
   model: string;

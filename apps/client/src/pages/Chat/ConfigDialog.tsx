@@ -95,24 +95,16 @@ const ConfigDialog = (props: { chatConversationId?: number }) => {
                   value: 'gpt-3.5-turbo',
                 },
                 {
-                  label: 'gpt-3.5-turbo-0613',
-                  value: 'gpt-3.5-turbo-0613',
-                },
-                {
-                  label: 'gpt-3.5-turbo-16k',
-                  value: 'gpt-3.5-turbo-16k',
-                },
-                {
-                  label: 'gpt-3.5-turbo-16k-0613',
-                  value: 'gpt-3.5-turbo-16k-0613',
-                },
-                {
                   label: 'gpt-4',
                   value: 'gpt-4',
                 },
                 {
-                  label: 'gpt-4-0613',
-                  value: 'gpt-4-0613',
+                  label: 'gpt-4o',
+                  value: 'gpt-4o',
+                },
+                {
+                  label: 'gpt-4o-mini',
+                  value: 'gpt-4o-mini',
                 },
               ]}
             />
