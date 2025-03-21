@@ -267,7 +267,7 @@ function ChatPanel(
 
         <div className="relative">
           <textarea
-            value={currentQuestion}
+            value={submitting ? '正在生成答案...' : currentQuestion}
             onInput={e => setCurrentQuestion(e.currentTarget.value)}
             className="absolute inset-0 pl-3 pr-[80px] py-2 w-full break-all focus:border-cyan-600 resize-none leading-normal scrollbar scrollbar-1 border-[2px] text-sm rounded-md outline-none disabled:text-gray-300"
             placeholder={'按ctrl+enter发送'}
